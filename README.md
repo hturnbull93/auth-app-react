@@ -55,3 +55,39 @@ Instead it makes an axios post request:
 - config object with `withCredentials` as true (allows the cookie to be set on the browser, incredibly important!!!).
 
 `Registration` imported into and rendered in `Home`.
+
+### Passing Props Down
+
+In `src/components/app.js`:
+
+Added a constructor setting up state of loggedInStatus: 'NOT_LOGGED_IN' and an empty object for user (to be populated later).
+
+Alter `Route`s to use render prop, passing in props to an arrow function (jsx needs to use parentheses for nested arrow function), returning a `Home` and `Dashboard` component, spreading the passed props over it, and then adding loggedInStatus from state as a prop.
+
+In `src/components/Home.js` and `src/components/Dashboard.js`:
+
+Added a constructor to accept props, then render the loggedInStatus in an h2.
+
+`Dashboard` simply takes props as an argument then renders props.loggedInStatus.
+
+### Passing Back up to Prop
+
+In `src/components/auth/Registration.js`:
+
+If the result of the post request data's status is 'created' call `this.props.handleAuth` passing in the data (up the chain to `Home`). Else set state of error with a message 'That email is already in use', rendered conditionally in an h2.
+
+In `src/components/Home.js`:
+
+Added a method `handleAuth` that takes data and calls `this.props.handleAuth` passing in the data (up the chain to `App`). This also pushes '/dashboard' onto the props history (passed in spread props from `App`), causing 'redirect'.
+
+Pass the method down to `Registration` as a prop
+
+In `src/components/app.js`:
+
+Added a method `handleAuth` that takes data and sets the state user with the data's user object, and the loggedInStatus as 'LOGGED_IN'.
+
+Pass the method down to `Home` as a prop.
+
+App: Grandparent, Home: Parent, Registrations: Child. For best practice do no more than grandparent behaviour manually, for more complex things use Redux state management.
+
+### Login Component
