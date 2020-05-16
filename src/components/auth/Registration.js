@@ -10,6 +10,7 @@ export class Registration extends Component {
         email: "",
         password: "",
         password_confirmation: "",
+        error: ''
       },
     };
   }
@@ -32,7 +33,10 @@ export class Registration extends Component {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("res", res);
+        if (res.data.status === "created")
+          this.props.handleAuth(res.data);
+        else
+        this.setState({error: 'That email is already in use'})
       })
       .catch((error) => {
         console.log("error", error);
@@ -48,6 +52,7 @@ export class Registration extends Component {
   render() {
     return (
       <div>
+        <h2>{this.state.error}</h2>
         <form
           onSubmit={this.handleSubmit}
           style={{ display: "flex", flexDirection: "column" }}
