@@ -26,5 +26,11 @@ In `src/components/app.js` imported `BrowserRouter`, `Switch` and `Route` from r
 
 Render a `BrowserRouter` with nested `Switch`, and nested `Route`s within it for home and dashboard.
 
+### Prepare Axios
 
+Axios is a promise based HTTP package. It makes async fetch easier to do.
+
+```bash
+npm install axios --save
+```
 

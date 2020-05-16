@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import { Dashboard } from './Dashboard';
 
-export default class App   extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className='app'>
