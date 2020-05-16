@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export class Registration extends Component {
+export class Auth extends Component {
   constructor(props) {
     super(props);
 
+    let regMode = this.props.target === "registrations";
+
     this.state = {
-      user: {
-        email: "",
-        password: "",
-        password_confirmation: "",
-        error: ''
-      },
+      email: "",
+      password: "",
+      password_confirmation: "",
+      error: false,
+      regMode: regMode,
+      errorMessage: regMode
+        ? "That email is already taken"
+        : "Incorrect email or password",
+      buttonText: regMode ? "Register" : "Log in",
     };
   }
 
@@ -22,7 +27,7 @@ export class Registration extends Component {
 
     axios
       .post(
-        "http://localhost:3001/registrations",
+        "http://localhost:3001/" + this.props.target,
         {
           user: {
             email: email,
@@ -33,10 +38,8 @@ export class Registration extends Component {
         { withCredentials: true }
       )
       .then((res) => {
-        if (res.data.status === "created")
-          this.props.handleAuth(res.data);
-        else
-        this.setState({error: 'That email is already in use'})
+        if (res.data.status === "created") this.props.handleAuth(res.data);
+        else this.setState({ error: true });
       })
       .catch((error) => {
         console.log("error", error);
@@ -50,9 +53,22 @@ export class Registration extends Component {
   };
 
   render() {
+    let passwordConfirmation = this.state.regMode ? (
+      <input
+        type="password"
+        name="password_confirmation"
+        value={this.state.password_confirmation}
+        onChange={this.handleChange}
+        required
+      />
+    ) : null;
+    let passwordConfirmationLabel = this.state.regMode ? (
+      <label htmlFor="password_confirmation">Password Confirmation</label>
+    ) : null;
+
     return (
       <div>
-        <h2>{this.state.error}</h2>
+        <h3>{this.state.error ? this.state.errorMessage : null}</h3>
         <form
           onSubmit={this.handleSubmit}
           style={{ display: "flex", flexDirection: "column" }}
@@ -75,20 +91,13 @@ export class Registration extends Component {
             required
           />
 
-          <label htmlFor="password_confirmation">Password Confirmation</label>
-          <input
-            type="password"
-            name="password_confirmation"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
-            required
-          />
-
-          <button type="submit">Register</button>
+          {passwordConfirmationLabel}
+          {passwordConfirmation}
+          <button type="submit">{this.state.buttonText}</button>
         </form>
       </div>
     );
   }
 }
 
-export default Registration;
+export default Auth;
