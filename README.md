@@ -2,12 +2,12 @@
 
 This is a project to practice interfacing with an API in a React front end app.
 
-Interfaces with this [Rails API project](https://github.com/hturnbull93/rails-auth-practice).
+Interfaces with this [Rails API project](https://github.com/hturnbull93/auth-app-rails).
 
 ## Set Up Instructions
 
 1. Clone this repo.
-2. Clone the [Rails API repo](https://github.com/hturnbull93/rails-auth-practice).
+2. Clone the [Rails API repo](https://github.com/hturnbull93/auth-app-rails).
 3. In the Rails root directory run the following commands to set up the database and run the server:
 
     ```bash
