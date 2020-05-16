@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
-import { Dashboard } from "./Dashboard";
+import Dashboard from "./Dashboard";
 import Axios from "axios";
 
 export default class App extends Component {
@@ -23,7 +23,7 @@ export default class App extends Component {
           !res.data.logged_in &&
           this.state.loggedInStatus === "LOGGED_IN"
         )
-          this.setState({ user: {}, loggedInStatus: "NOT_LOGGED_IN" });
+          this.handleLogOut();
       })
       .catch((error) => {
         console.log("error", error);
@@ -34,6 +34,13 @@ export default class App extends Component {
     this.setState({
       user: data.user,
       loggedInStatus: "LOGGED_IN",
+    });
+  };
+
+  handleLogOut = () => {
+    this.setState({
+      user: {},
+      loggedInStatus: "NOT_LOGGED_IN",
     });
   };
 
@@ -50,7 +57,11 @@ export default class App extends Component {
               exact
               path={"/"}
               render={(props) => (
-                <Home {...props} handleAuth={this.handleAuth} />
+                <Home
+                  {...props}
+                  user={this.state.user}
+                  handleAuth={this.handleAuth}
+                />
               )}
             />
 
@@ -58,7 +69,11 @@ export default class App extends Component {
               exact
               path={"/dashboard"}
               render={(props) => (
-                <Dashboard {...props} user={this.state.user} />
+                <Dashboard
+                  {...props}
+                  handleLogOut={this.handleLogOut}
+                  user={this.state.user}
+                />
               )}
             />
           </Switch>

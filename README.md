@@ -113,3 +113,17 @@ In `src/components/app.js`:
 Else if the response logged_in is false and the loggedInStatus is "LOGGED_IN" then clear the user in state and set loggedInStatus to "NOT_LOGGED_IN". It is important to check if the API says that the user is not logged in to remove them so the React app acts appropriately.
 
 `checkLoginStatus` is called in `componentDidMount` lifecycle hook.
+
+Added props to `Home` and `Dashboard` with the user, to display the user email on them.
+
+### Logging Out
+
+In `src/components/app.js`:
+
+`handleLogOut` function clear the user in state and set loggedInStatus to "NOT_LOGGED_IN". Passed to Dashboard as a prop.
+
+In `src/components/Dashboard.js`:
+
+`handleLogOut` makes a delete request to localhost:3001/logout config object withCredentials as true (to be able to delete the cookie), calls `handleLogOut` up the chain and pushes '/' onto props history (redirect to home).
+
+Button that calls `handleLogOut` onClick.
