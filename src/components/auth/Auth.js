@@ -38,7 +38,7 @@ export class Auth extends Component {
         { withCredentials: true }
       )
       .then((res) => {
-        if (res.data.status === "created") this.props.handleAuth(res.data);
+        if (res.data.logged_in) this.props.handleAuth(res.data);
         else this.setState({ error: true });
       })
       .catch((error) => {

@@ -91,3 +91,14 @@ Pass the method down to `Home` as a prop.
 App: Grandparent, Home: Parent, Registrations: Child. For best practice do no more than grandparent behaviour manually, for more complex things use Redux state management.
 
 ### Login Component
+
+Hybridising the Registration component as a login form also.
+
+Renamed as `Auth`
+
+Target is passed in as a prop, either 'registrations' or 'sessions'.
+
+Target url of post request set with target prop, as is conditional rendering of password confirmation field and label, button text, and error message.
+
+The function of `handleAuth` works the same in both types, as the format of the returned data is the same from both sessions and registrations API routes.
+
