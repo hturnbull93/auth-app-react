@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import Axios from "axios";
 
 export class Auth extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export class Auth extends Component {
 
     const { email, password, password_confirmation } = this.state;
 
-    axios
+    Axios
       .post(
         "http://localhost:3001/" + this.props.target,
         {
