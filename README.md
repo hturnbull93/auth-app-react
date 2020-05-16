@@ -34,3 +34,14 @@ Axios is a promise based HTTP package. It makes async fetch easier to do.
 npm install axios --save
 ```
 
+### Registration form
+
+In `src/components/auth/Registration.js`:
+
+Class component, has state of `email`, `password` and `password_confirmation` constructed as empty strings.
+
+`handleSubmit` as the form's onSubmit event handler.
+
+
+
+`Registration` imported into and rendered in `Home`.
