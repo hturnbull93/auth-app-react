@@ -1,49 +1,77 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import axios from "axios";
 
 export class Registration extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      password_confirmation: ''
-    }
+      user: {
+        email: "",
+        password: "",
+        password_confirmation: "",
+      },
+    };
   }
 
   handleSubmit = (e) => {
-    console.log('submitted')
-    e.preventDefault
-  }
+    e.preventDefault();
+
+    const { email, password, password_confirmation } = this.state;
+
+    axios
+      .post(
+        "http://localhost:3001/registrations",
+        {
+          user: {
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   handleChange = (e) => {
-    console.log(e)
-  }
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+        <form
+          onSubmit={this.handleSubmit}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
           <label htmlFor="email">Email</label>
-          <input 
+          <input
             type="email"
             name="email"
             value={this.state.email}
             onChange={this.handleChange}
             required
           />
-          
+
           <label htmlFor="password">Password</label>
-          <input 
+          <input
             type="password"
             name="password"
             value={this.state.password}
             onChange={this.handleChange}
             required
           />
-          
+
           <label htmlFor="password_confirmation">Password Confirmation</label>
-          <input 
+          <input
             type="password"
             name="password_confirmation"
             value={this.state.password_confirmation}
@@ -54,8 +82,8 @@ export class Registration extends Component {
           <button type="submit">Register</button>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default Registration
+export default Registration;

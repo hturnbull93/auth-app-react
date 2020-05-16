@@ -40,12 +40,18 @@ In `src/components/auth/Registration.js`:
 
 Class component, has state of `email`, `password` and `password_confirmation` constructed as empty strings.
 
-`handleSubmit` as the form's onSubmit event handler.
-
 Form fields value set to the corresponding state value, onChange as `handleChange`.
 
+`handleChange` sets the state with the events name and target (fields need the same name as the state).
 
+`handleSubmit` as the form's onSubmit event handler.
 
+`handleSubmit` prevents the default event (post request).
 
+Instead it makes an axios post request:
+
+- url to target as localhost:3001/registrations (the Rails API).
+- Object of data to pass with the post request (object containing user object with email, password and password_confirmation from state).
+- config object with `withCredentials` as true (allows the cookie to be set on the browser, incredibly important!!!).
 
 `Registration` imported into and rendered in `Home`.
