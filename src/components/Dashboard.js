@@ -4,7 +4,10 @@ export const Dashboard = (props) => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <h2>Status: {props.loggedInStatus}</h2>
+      <section>
+        <p>{props.user.email}</p>
+        <p>{props.user.created_at}</p>
+      </section>
     </div>
   );
 }

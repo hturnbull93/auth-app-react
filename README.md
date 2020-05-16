@@ -6,7 +6,7 @@ Interfaces with this [Rails API project](https://github.com/hturnbull93/rails-au
 
 ## Development Journal
 
-### Set up
+### Set Up
 
 Uses the React/Redux/Router starter project from npm package `devcamp-js-builder`.
 
@@ -34,7 +34,7 @@ Axios is a promise based HTTP package. It makes async fetch easier to do.
 npm install axios --save
 ```
 
-### Registration form
+### Registration Form
 
 In `src/components/auth/Registration.js`:
 
@@ -70,7 +70,7 @@ Added a constructor to accept props, then render the loggedInStatus in an h2.
 
 `Dashboard` simply takes props as an argument then renders props.loggedInStatus.
 
-### Passing Back up to Prop
+### Passing Back Up To Prop
 
 In `src/components/auth/Registration.js`:
 
@@ -102,3 +102,14 @@ Target url of post request set with target prop, as is conditional rendering of 
 
 The function of `handleAuth` works the same in both types, as the format of the returned data is the same from both sessions and registrations API routes.
 
+### Persisting Logged In Status
+
+Currently refreshing the page switched a logged in user to logged out.
+
+In `src/components/app.js`:
+
+`checkLoginStatus` method gets from localhost:3001/logged_in, config object withCredentials set to true to allow cookie to be set. Then if the response data logged_in is true and the state loggedInStatus is "NOT_LOGGED_IN", call `handleAuth` with the data to set the state loggedInStatus and user.
+
+Else if the response logged_in is false and the loggedInStatus is "LOGGED_IN" then clear the user in state and set loggedInStatus to "NOT_LOGGED_IN". It is important to check if the API says that the user is not logged in to remove them so the React app acts appropriately.
+
+`checkLoginStatus` is called in `componentDidMount` lifecycle hook.
