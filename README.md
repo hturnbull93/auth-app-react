@@ -42,6 +42,10 @@ Class component, has state of `email`, `password` and `password_confirmation` co
 
 `handleSubmit` as the form's onSubmit event handler.
 
+Form fields value set to the corresponding state value, onChange as `handleChange`.
+
+
+
 
 
 `Registration` imported into and rendered in `Home`.
