@@ -15,6 +15,7 @@ export class Home extends Component {
     return (
       <div>
         <h1>Home</h1>
+        <h3>{this.props.user.email ? "Welcome " + this.props.user.email : null}</h3>
         <h2>Sign Up</h2>
         <Auth target="registrations" handleAuth={this.handleAuth}/>
         <h2>Log In</h2>
