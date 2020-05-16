@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import Moment from "moment";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -7,12 +8,14 @@ export class Dashboard extends Component {
   }
 
   handleLogOut = () => {
-    Axios.delete('http://localhost:3001/logout', { withCredentials: true }).then(() => {
-      this.props.handleLogOut();
-      this.props.history.push('/')
-    }).catch(error => {
-      console.log('error', error)
-    })
+    Axios.delete("http://localhost:3001/logout", { withCredentials: true })
+      .then(() => {
+        this.props.handleLogOut();
+        this.props.history.push("/");
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   render() {
@@ -23,8 +26,12 @@ export class Dashboard extends Component {
           <h2>User Details</h2>
           <p>Email:</p>
           <p>{this.props.user.email}</p>
-          <p>Account Created At:</p>
-          <p>{this.props.user.created_at}</p>
+          <p>Account Created On:</p>
+          <p>
+            {Moment(this.props.user.created_at).format(
+              "dddd, MMMM Do YYYY, h:mm:ss a"
+            )}
+          </p>
         </section>
         <button onClick={this.handleLogOut}>Log out</button>
       </div>
