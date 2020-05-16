@@ -7,9 +7,12 @@ export class Dashboard extends Component {
   }
 
   handleLogOut = () => {
-    Axios.delete('http://localhost:3001/logout', { withCredentials: true })
-    this.props.history.push('/')
-    this.props.handleLogOut();
+    Axios.delete('http://localhost:3001/logout', { withCredentials: true }).then(() => {
+      this.props.handleLogOut();
+      this.props.history.push('/')
+    }).catch(error => {
+      console.log('error', error)
+    })
   };
 
   render() {

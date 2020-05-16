@@ -124,6 +124,6 @@ In `src/components/app.js`:
 
 In `src/components/Dashboard.js`:
 
-`handleLogOut` makes a delete request to localhost:3001/logout config object withCredentials as true (to be able to delete the cookie), calls `handleLogOut` up the chain and pushes '/' onto props history (redirect to home).
+`handleLogOut` makes a delete request to localhost:3001/logout config object withCredentials as true (to be able to delete the cookie). Then, calls `handleLogOut` up the chain (to clear user object and set loggedInStatus) and pushes '/' onto props history (redirect to home).
 
-Button that calls `handleLogOut` onClick.
+Added button that calls `handleLogOut` onClick.
