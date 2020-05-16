@@ -5,8 +5,8 @@ export const Dashboard = (props) => {
     <div>
       <h1>Dashboard</h1>
       <section>
-        <p>{props.user.email}</p>
-        <p>{props.user.created_at}</p>
+        <p>Email: {props.user.email}</p>
+        <p>Account Created At: {props.user.created_at}</p>
       </section>
     </div>
   );
